@@ -55,6 +55,7 @@ jobs:
 
       - name: s3 list files
         run: |
+          set -x
           # install aws cli
           aws --version
           
