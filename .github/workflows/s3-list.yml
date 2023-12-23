@@ -57,6 +57,15 @@ jobs:
           # install aws cli
           aws --version
           
-          # check if bucket name is specified, if not list top level buckets in s3 region
-          # if bucket name is specified then list the contents inside the bucket
+          s3_bucket_name=${{ inputs.bucket_name }}
+          if [[ -z "${s3_bucket_name}" ]]; then
+            aws s3 ls
+          else
+            # else list the contents inside the bucket
+            aws s3 ls s3://s3_bucket_name
+          fi
+          
+          
+          
+          
           
