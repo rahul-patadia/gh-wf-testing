@@ -1,0 +1,62 @@
+name: s3-list-files
+
+on:
+  workflow_dispatch:
+    inputs:
+      bucket_name:
+        description: 'Bucket name to list files from.'
+        required: false
+        type: string
+      bucket_key:
+        description: 'Path/Key from which files to be listed.'
+        required: false
+        type: string
+      aws_region:
+        description: 'AWS Region (S3)'
+        required: true
+        type: choice
+        default: 'eu-west-1'
+        options:
+          - 'eu-west-1'
+          - 'us-east-1'
+      environment:
+        description: 'Environment'
+        required: true
+        type: choice
+        default: 'dev'
+        options:
+          - 'dev'
+          - 'prod'
+      oidc_session_duration:
+        required: false
+        type: number
+        default: 3600 # 1 hour
+        description: "AWS OIDC login session duration in seconds, max setting is 12 hours"
+
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  s3-list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out code
+        uses: actions/checkout@v3
+
+      - name: aws oidc login
+        uses: patadia-tech/shared-workflows/gh-aws-oidc@initial-commit
+        with:
+          aws_region: ${{ inputs.aws_region }}
+          environment: ${{ inputs.environment }}
+          oidc_session_duration: ${{ inputs.oidc_session_duration }}
+
+      - name: s3 list files
+        run: |
+          # install aws cli
+          aws --version
+          
+          # check if bucket name is specified, if not list top level buckets in s3 region
+          # if bucket name is specified then list the contents inside the bucket
+          
