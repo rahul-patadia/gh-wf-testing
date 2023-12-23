@@ -8,7 +8,7 @@ on:
         required: false
         type: string
       bucket_key:
-        description: 'Path/Key from which files will be deleted. In example: "path/" or "path/path2/". If you set specific file key "path/path2/file1.jpg" only that file will be deleted.'
+        description: 'Path/Key from which files to be listed.'
         required: false
         type: string
       aws_region:
