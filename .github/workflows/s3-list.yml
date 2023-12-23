@@ -15,9 +15,9 @@ on:
         description: 'AWS Region (S3)'
         required: true
         type: choice
-        default: 'eu-west-1'
+        default: 'eu-west-2'
         options:
-          - 'eu-west-1'
+          - 'eu-west-2'
           - 'us-east-1'
       environment:
         description: 'Environment'
@@ -46,17 +46,28 @@ jobs:
         uses: actions/checkout@v3
 
       - name: aws oidc login
-        uses: patadia-tech/shared-workflows/gh-aws-oidc@initial-commit
+        uses: patadia-tech/shared-workflows/gh-aws-oidc@main
         with:
           aws_region: ${{ inputs.aws_region }}
           environment: ${{ inputs.environment }}
+          oidc_role_name: 'PT-GithubCI-OIDC'
           oidc_session_duration: ${{ inputs.oidc_session_duration }}
 
       - name: s3 list files
         run: |
+          set -x
           # install aws cli
           aws --version
           
-          # check if bucket name is specified, if not list top level buckets in s3 region
-          # if bucket name is specified then list the contents inside the bucket
+          s3_bucket_name=${{ inputs.bucket_name }}
+          if [[ -z "${s3_bucket_name}" ]]; then
+            aws s3 ls
+          else
+            # else list the contents inside the bucket
+            aws s3 ls s3://${s3_bucket_name}
+          fi
+          
+          
+          
+          
           
