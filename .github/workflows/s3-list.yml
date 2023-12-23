@@ -64,7 +64,7 @@ jobs:
             aws s3 ls
           else
             # else list the contents inside the bucket
-            aws s3 ls s3://s3_bucket_name
+            aws s3 ls s3://${s3_bucket_name}
           fi
           
           
