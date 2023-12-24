@@ -50,7 +50,7 @@ jobs:
         with:
           aws_region: ${{ inputs.aws_region }}
           environment: ${{ inputs.environment }}
-          oidc_role_name: 'PT-GithubCI-OIDC'
+          oidc_role_name: 'RP-GithubCI-OIDC'
           oidc_session_duration: ${{ inputs.oidc_session_duration }}
 
       - name: s3 list files
