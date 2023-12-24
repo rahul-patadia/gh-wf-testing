@@ -46,7 +46,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: aws oidc login
-        uses: rahul-patadia/shared-workflows/gh-aws-oidc@initial-commit
+        uses: rahul-patadia/shared-workflows/gh-aws-oidc@main
         with:
           aws_region: ${{ inputs.aws_region }}
           environment: ${{ inputs.environment }}
