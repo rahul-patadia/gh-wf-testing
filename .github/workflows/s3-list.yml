@@ -45,6 +45,8 @@ jobs:
       - name: check out code
         uses: actions/checkout@v4
 
+        # GH actions quirk, if shared action is in a private repo then you need to check out the repo first before using the action
+        # This step is only required for private repos in a user's account, if you are using it in GH Org then shared actions from private repos are directly available
       - name: Check out repository
         uses: actions/checkout@v4
         with:
