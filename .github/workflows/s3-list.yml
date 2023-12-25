@@ -53,7 +53,7 @@ jobs:
           path: ./.github/actions/shared-workflows
 
       - name: aws oidc login
-        uses: ../.github/actions/shared-workflows/gh-aws-oidc@main
+        uses: ./.github/actions/shared-workflows/gh-aws-oidc@main
         with:
           aws_region: ${{ inputs.aws_region }}
           environment: ${{ inputs.environment }}
