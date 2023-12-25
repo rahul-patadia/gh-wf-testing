@@ -49,7 +49,7 @@ jobs:
 
         # GH actions quirk, if shared action is in a private repo then you need to check out the repo first before using the action
         # This step is only required for private repos in a user's account, if you are using it in GH Org then shared actions from private repos are directly available
-      - name: Check out repository
+      - name: check out shared workflows repository
         uses: actions/checkout@v4
         with:
           repository: rahul-patadia/shared-workflows
@@ -67,7 +67,7 @@ jobs:
       - name: s3 list files
         run: |
           set -x
-          # install aws cli
+          
           aws --version
           
           s3_bucket_name=${{ inputs.bucket_name }}
