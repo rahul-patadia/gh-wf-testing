@@ -43,10 +43,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          repository: rahul-patadia/shared-workflows
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ./.github/actions/shared-workflows
 
       - name: aws oidc login
-        uses: rahul-patadia/shared-workflows/gh-aws-oidc@main
+        uses: ../.github/actions/shared-workflows/gh-aws-oidc@main
         with:
           aws_region: ${{ inputs.aws_region }}
           environment: ${{ inputs.environment }}
