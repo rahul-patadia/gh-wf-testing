@@ -1,4 +1,6 @@
-name: s3-list-files
+# This is an example workflow to demonstrate the GH AWS OIDC in action
+# The workflow will log in to AWS using the OIDC role name specified and then perform the requested operation on the specified AWS Service
+name: s3-list
 
 on:
   workflow_dispatch:
